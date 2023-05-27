@@ -1,0 +1,270 @@
+body {
+    background-image: url(https://catherineasquithgallery.com/uploads/posts/2021-02/1612767126_6-p-fon-goluboe-nebo-s-oblakami-9.jpg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+* {
+    box-sizing: border-box;
+  }
+
+.select-form {
+    width: 8%;
+    min-width: 8%;
+    height: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+
+}
+
+#cities {
+    width: 100%;
+    height: 100%;
+    font-size: 1vw;
+    background-color: rgba(17, 88, 158, 0.555);
+    color: rgba(255, 255, 255, 0.753);
+    border: 1px solid rgba(255, 255, 255, 0.603);
+    outline: none;
+}
+
+.container {
+    background-color: rgba(17, 88, 158, 0.199);
+    width: 60%;
+    max-width:100%;
+    height: auto;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+   
+}
+
+.date-inform {
+    width: 100%;
+    height: auto;
+    max-width:100%;
+
+}
+
+.fa-map-marker {
+    color: white;
+    padding-top: 3px;
+}
+
+.today {
+    color: white;
+    font-size: 2.0vw;
+    font-family:'Times New Roman', Times, serif;
+    margin-top: 15px;
+    margin-left: 9px;
+    text-align: center;
+    
+}
+.date {
+     color: white;
+     font-size: 1.5vw;
+     font-family:'Times New Roman', Times, serif;
+     margin-left: 9px;
+     text-align: center;
+}
+
+
+
+.current {
+    width: 70%;
+    height: auto;
+    max-width:100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    /* margin-bottom: 1em; */
+    justify-content:center;
+}
+
+
+.weather-condition {
+    width: 80%;
+    max-width:100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.current-icon {
+    width: 50%;
+    max-width: 90%;
+    min-width: 30%;
+    height: auto; 
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.current-temperature {
+    width: 90%;
+    max-width:100%;
+    height: auto;    
+}
+
+h3 {
+    color: white;
+    width: 100%;
+    height: auto;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 3vw;
+    margin: 0ch;
+    display: inline;
+}
+
+
+.celcius {
+    border-right: 1px solid white;
+    color: white;
+    display: inline;
+    padding-right: 5px;
+    cursor: pointer;
+    font-size: 1.5vw;
+}
+.fahrenheit {
+    color: white;
+    display: inline;
+    cursor: pointer;
+    font-size: 1.5vw;
+}
+
+p {
+    color: white;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 1.2vw;
+    margin: 0ch;  
+}
+
+.information {
+    color: rgba(255, 255, 255, 0.719);
+    font-family:'Times New Roman', Times, serif;
+    font-size: 1.2vw;
+    width: 50%;
+    align-self: center;
+    max-width:100%;
+    /* margin-left: 100px; */
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.information table {
+    width: 80%;
+    text-align: left;
+}
+
+.forecast {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.forecast-day {
+    width: 14%;
+    height: auto;
+    max-width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    cursor: pointer;
+}
+
+.forecast-day:hover {
+    background-color: rgba(17, 88, 158, 0.897);
+}
+
+.icon {
+    width: 70%;
+}
+
+h4 {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.5vw;
+    margin: 0ch;
+}
+
+.day {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.4vw;
+}
+
+.detailed-weather {
+    background-color: rgba(17, 88, 158, 0.733);
+    width: 60%;
+    height: auto;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.detailed-weather table {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.1vw;
+    width: 100%;
+    height: auto;
+    border-collapse: collapse;
+    table-layout:fixed;
+}
+
+
+.detailed-weather td {
+    border: 1px solid rgba(255, 255, 255, 0.37);
+    padding: 10px;
+    text-align: center;
+  
+}
+
+.detailed-parameters {
+    background-color: rgba(17, 88, 158, 0.733);
+    width: 60%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.detailed-parameters table{
+     color: white;
+     font-family: 'Times New Roman', Times, serif;
+     font-size: 1.3vw;
+     width: 100%;
+     border-collapse: collapse;
+     table-layout:fixed;
+    
+}
+
+.detailed-parameters td {
+    border: 1px solid rgba(255, 255, 255, 0.37);
+    padding: 10px;
+    text-align: center;
+    
+}
+
+caption {
+    border: 1px solid rgba(255, 255, 255, 0.37);;
+    font-size: 2vw;
+}
