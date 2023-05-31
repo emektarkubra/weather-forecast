@@ -72,27 +72,17 @@ function createElement(data, day) {
 
     const today = document.createElement("div");
     today.className = "today";
+    let days = ["SUNDAY", "MONDAY", "THUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
+    let date = new Date();
+    today.textContent = days[date.getDay()];
 
-    let days = {
-        0: "SUNDAY",
-        1: "MONDAY",
-        2: "THUESDAY",
-        3: "WEDNESDAY",
-        4: "THURSDAY",
-        5: "FRIDAY",
-        6: "SATURDAY"
-    }
-
-    today.textContent = days[day];
-
-
-    const date = document.createElement("div");
-    date.className = "date";
-    date.textContent = data.current.last_updated;
+    const currentDate = document.createElement("div");
+    currentDate.className = "current-date";
+    currentDate.textContent = data.current.last_updated;
 
     container.appendChild(dateInform);
     dateInform.appendChild(today);
-    dateInform.appendChild(date);
+    dateInform.appendChild(currentDate);
 
     // current
 
@@ -167,14 +157,13 @@ function createElement(data, day) {
 
     const dayName = document.createElement("div");
     dayName.className = "day";
-    dayName.textContent = days[day];
+    dayName.textContent = days[date.getDay()];
 
     const icon = document.createElement("div");
     icon.className = "icon";
 
     const img1 = document.createElement("img");
     img1.src = data.forecast.forecastday[0].day.condition.icon;
-
     img1.alt = "image not found";
 
     const lightTemp1 = document.createElement("h4");
