@@ -15,169 +15,414 @@ function getDataFromAPI(url) {
     return promise;
 }
 
-
-function get(day) {
-
-    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=31102415b6534b21a47133156232605&q=Ankara&days=${day}&aqi=no&alerts=no`
-
-    getDataFromAPI(apiUrl)
-        .then((data) => {
-            createElement(data, day);
-
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-}
+// getDataFromAPI(`http://api.weatherapi.com/v1/forecast.json?key=31102415b6534b21a47133156232605&q=07112&days=7&q=Ankara`)
 
 
-get("1");
+getDataFromAPI(`weatherapi.json`)
+    .then((data) => {
+        console.log(data)
+        createElement(data);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
 
-function createElement(data, day) {
 
-    // select-form
+const container = document.querySelector(".container");
+const forecastContainer = document.querySelector(".forecast-container");
 
-    const selectForm = document.createElement("div");
-    selectForm.className = "select-form";
+let days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+let date = new Date();
+let dayIndex = date.getDay();
 
-    const select = document.createElement("select");
-    select.name = "city";
-    select.id = "cities";
 
-    const option1 = document.createElement("option");
-    option1.value = "Ankara";
-    option1.textContent = "Ankara";
-
-    const option2 = document.createElement("option");
-    option2.value = "İstanbul";
-    option2.textContent = "İstanbul";
-
-    if (option1.selected) {
-        option1.selected == true;
-    } else if (option2.selected) {
-        option2.selected == true;
-    }
-
-    const container = document.querySelector(".container")
-    container.appendChild(selectForm);
-    selectForm.appendChild(select);
-    select.appendChild(option1);
-    select.appendChild(option2);
+function createElement(data) {
 
     // date-inform
+    const dateInformBox = document.createElement("div");
+    dateInformBox.className = "date-inform";
 
+    const todayNameBox = document.createElement("div");
+    todayNameBox.className = "today";
+    todayNameBox.textContent = days[dayIndex];
 
-    const dateInform = document.createElement("div");
-    dateInform.className = "date-inform";
+    const currentDateBox = document.createElement("div");
+    currentDateBox.className = "current-date";
+    currentDateBox.textContent = data.current.last_updated;
 
-    const today = document.createElement("div");
-    today.className = "today";
-    let days = ["SUNDAY", "MONDAY", "THUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
-    let date = new Date();
-    today.textContent = days[date.getDay()];
+    container.appendChild(dateInformBox);
+    dateInformBox.appendChild(todayNameBox);
+    dateInformBox.appendChild(currentDateBox);
 
-    const currentDate = document.createElement("div");
-    currentDate.className = "current-date";
-    currentDate.textContent = data.current.last_updated;
+    // current information
 
-    container.appendChild(dateInform);
-    dateInform.appendChild(today);
-    dateInform.appendChild(currentDate);
+    const currentBox = document.createElement("div");
+    currentBox.className = "current";
 
-    // current
+    const weatherConditionBox = document.createElement("div");
+    weatherConditionBox.className = "weather-condition";
 
-    //weather condition
+    const currentIconBox = document.createElement("div");
+    currentIconBox.className = "current-icon";
 
-    const current = document.createElement("div");
-    current.className = "current";
+    const currentIcon = document.createElement("img");
+    currentIcon.src = data.current.condition.icon;
+    currentIcon.alt = "image not found";
 
-    const weatherCondition = document.createElement("div");
-    weatherCondition.className = "weather-condition";
-
-    const currentIcon = document.createElement("div");
-    currentIcon.className = "current-icon";
-
-
-    const currentImg = document.createElement("img");
-    currentImg.src = data.current.condition.icon;
-    currentImg.alt = "image not found";
-
-    const currentTemp = document.createElement("div");
-    currentTemp.className = "current-temperature";
+    const currentTempBox = document.createElement("div");
+    currentTempBox.className = "current-temperature";
 
     const temp = document.createElement("h3");
-    temp.textContent = data.current.temp_c;
+    temp.textContent = `${data.current.temp_c}°`;
 
-    const celcius = document.createElement("div");
-    celcius.className = "celcius";
-    celcius.textContent = "°C";
+    const celciusSymbol = document.createElement("div");
+    celciusSymbol.className = "celcius";
+    celciusSymbol.textContent = "°C";
 
-    const fahrenheit = document.createElement("div");
-    fahrenheit.className = "fahrenheit";
-    fahrenheit.textContent = "°F";
+    const fehrenheitSymbol = document.createElement("div");
+    fehrenheitSymbol.className = "fahrenheit";
+    fehrenheitSymbol.textContent = "°F";
 
-    const text = document.createElement("p");
-    text.textContent = data.current.condition.text;
+    const currentText = document.createElement("p");
+    currentText.textContent = data.current.condition.text;
 
-    const information = document.createElement("div");
-    information.className = "information";
+    if ((data.current.condition.text).includes("rain")) document.body.style.backgroundImage = "url('https://www.wallpaperup.com/uploads/wallpapers/2020/03/17/1373964/472766df4d96f765c7d300631f905fcb-1000.jpg')";
+    else if ((data.current.condition.text).includes("sun")) document.body.style.backgroundImage = "url('https://img.gazeta.ru/files3/839/7947839/upload-shutterstock_109674992-pic4_zoom-1500x1500-83836.jpg')";
+    else if ((data.current.condition.text).includes("cloud")) document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1528157509193-8254fac59543?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80')";
+    else if ((data.current.condition.text).includes("snow")) document.body.style.backgroundImage = "url('https://kan-yu.com.ua/wp-content/uploads/2017/01/201701-1.jpg')";
 
-    information.innerHTML = `
-    <table>
-        <tr>
-            <td>Precip: ${data.current.precip_in} in</td>
-        </tr>
-        <tr>
-            <td>Humidity: ${data.current.humidity}%</td>
-        </tr>
-        <tr>
-            <td>Wind: ${data.current.wind_kph} kph</td>
-        </tr>
-    </table>
+    const currentInformBox = document.createElement("div");
+    currentInformBox.className = "information";
+    currentInformBox.innerHTML = `
+        <table>
+            <tr>
+                <td>Precip: ${data.current.precip_in} in</td>
+            </tr>
+            <tr>
+                <td>Humidity: ${data.current.humidity} %</td>
+            </tr>
+            <tr>
+                <td>Wind: ${data.current.wind_kph} kph</td>
+            </tr>
+        </table>
     `
 
-    container.appendChild(current);
-    current.appendChild(weatherCondition);
-    weatherCondition.appendChild(currentIcon);
-    currentIcon.appendChild(currentImg);
-    weatherCondition.appendChild(currentTemp);
-    currentTemp.appendChild(temp);
-    currentTemp.appendChild(celcius);
-    currentTemp.appendChild(fahrenheit);
-    currentTemp.appendChild(text);
-    current.appendChild(information);
+    container.appendChild(currentBox);
+    currentBox.appendChild(weatherConditionBox);
+    weatherConditionBox.appendChild(currentIconBox);
+    currentIconBox.appendChild(currentIcon);
+    weatherConditionBox.appendChild(currentTempBox);
+    currentTempBox.appendChild(temp);
+    currentTempBox.appendChild(celciusSymbol);
+    currentTempBox.appendChild(fehrenheitSymbol);
+    currentTempBox.appendChild(currentText);
+    currentBox.appendChild(currentInformBox);
 
     // forecast
 
-    const forecast = document.createElement("div");
-    forecast.className = "forecast";
+    const forecastBox = document.createElement("div");
+    forecastBox.className = "forecast";
+    container.appendChild(forecastBox);
+    let day = 0;
 
-    const forecastDay = document.createElement("div");
-    forecastDay.className = "forecast-day";
+    const forecastDays = data.forecast.forecastday;
 
-    const dayName = document.createElement("div");
-    dayName.className = "day";
-    dayName.textContent = days[date.getDay()];
+    forecastDays.forEach(forecastDay => {
 
-    const icon = document.createElement("div");
-    icon.className = "icon";
+        const forecastDayBox = document.createElement("div");
+        forecastDayBox.className = "forecast-day";
+        forecastDayBox.setAttribute("day", day);
+        day++;
 
-    const img1 = document.createElement("img");
-    img1.src = data.forecast.forecastday[0].day.condition.icon;
-    img1.alt = "image not found";
 
-    const lightTemp1 = document.createElement("h4");
-    lightTemp1.textContent = `${data.forecast.forecastday[0].day.maxtemp_c}°`;
+        const forecastDayName = document.createElement("div");
+        forecastDayName.className = "day";
+        forecastDayName.textContent = days[dayIndex];
+        dayIndex++;
+        if (dayIndex == 7) dayIndex = 0;
 
-    const nightTemp1 = document.createElement("h4");
-    nightTemp1.textContent = `${data.forecast.forecastday[0].day.mintemp_c}°`;
+        const iconBox = document.createElement("div");
+        iconBox.className = "icon";
 
-    container.appendChild(forecast)
-    forecast.appendChild(forecastDay);
-    forecastDay.appendChild(dayName);
-    forecastDay.appendChild(icon);
-    icon.appendChild(img1);
-    forecastDay.appendChild(lightTemp1);
-    forecastDay.appendChild(nightTemp1);
+        const iconImg = document.createElement("img");
+        iconImg.src = forecastDay.day.condition.icon;
+        iconImg.alt = "image not found";
 
+        const maxTemp = document.createElement("h4");
+        maxTemp.textContent = forecastDay.day.maxtemp_c;
+
+        const minTemp = document.createElement("h4");
+        minTemp.textContent = forecastDay.day.mintemp_c;
+
+        forecastBox.appendChild(forecastDayBox);
+        forecastDayBox.appendChild(forecastDayName);
+        forecastDayBox.appendChild(iconBox);
+        iconBox.appendChild(iconImg);
+        forecastDayBox.appendChild(maxTemp);
+        forecastDayBox.appendChild(minTemp);
+
+
+        // forecast detailed weather
+        forecastDayBox.addEventListener("click", createDetailWeather)
+
+        function createDetailWeather() {
+            forecastContainer.innerHTML = ``;     
+
+            const detailedWeatherBox = document.createElement("div");
+            detailedWeatherBox.className = "detailed-weather";
+            
+            detailedWeatherBox.innerHTML = `
+                <table>
+                    <caption>${forecastDay.date}</caption>
+                    <tr>
+                        <td>Sunrise: ${forecastDay.astro.sunrise}</td>
+                        <td>Max-temp</td>
+                        <td>Min-temp</td>
+                        <td>Avg-temp</td>
+                        <td>Total-precip</td>
+                        <td>Max-wind</td>
+                    </tr>
+                    <tr>
+                        <td>Sunset: ${forecastDay.astro.sunset}</td>
+                        <td>${forecastDay.day.maxtemp_c} °C</td>
+                        <td>${forecastDay.day.mintemp_c} °C</td>
+                        <td>${forecastDay.day.avgtemp_c} °C</td>
+                        <td>${forecastDay.day.totalprecip_in} in</td>
+                        <td>${forecastDay.day.maxwind_kph} kph</td>
+                    </tr>
+                </table>
+            
+            `
+
+            const detailedParametersBox = document.createElement("div");
+            detailedParametersBox.className = "detailed-parameters";
+
+            const hours = forecastDay.hour;
+            // console.log(hours)
+            detailedParametersBox.innerHTML = `
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>${hours[0].time.slice(11)}</td>
+                        <td>${hours[3].time.slice(11)}</td>
+                        <td>${hours[6].time.slice(11)}</td>
+                        <td>${hours[9].time.slice(11)}</td>
+                        <td>${hours[12].time.slice(11)}</td>
+                        <td>${hours[15].time.slice(11)}</td>
+                        <td>${hours[18].time.slice(11)}</td>
+                        <td>${hours[21].time.slice(11)}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><img src="${hours[0].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[3].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[6].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[9].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[12].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[15].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[18].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[21].condition.icon}" alt="image not found"></td>
+                    </tr>
+                    <tr>
+                        <td>Temp</td>
+                        <td>${hours[0].temp_c} °C</td>
+                        <td>${hours[3].temp_c} °C</td>
+                        <td>${hours[6].temp_c} °C</td>
+                        <td>${hours[9].temp_c} °C</td>
+                        <td>${hours[12].temp_c} °C</td>
+                        <td>${hours[15].temp_c} °C</td>
+                        <td>${hours[18].temp_c} °C</td>
+                        <td>${hours[21].temp_c} °C</td>
+                    </tr>
+                    <tr>
+                        <td>Wind</td>
+                        <td>${hours[0].wind_kph} kph</td>
+                        <td>${hours[3].wind_kph} kph</td>
+                        <td>${hours[6].wind_kph} kph</td>
+                        <td>${hours[9].wind_kph} kph</td>
+                        <td>${hours[12].wind_kph} kph</td>
+                        <td>${hours[15].wind_kph} kph</td>
+                        <td>${hours[18].wind_kph} kph</td>
+                        <td>${hours[21].wind_kph} kph</td>
+                    </tr>
+                    <tr>
+                        <td>Precip</td>
+                        <td>${hours[0].precip_in} in</td>
+                        <td>${hours[3].precip_in} in</td>
+                        <td>${hours[6].precip_in} in</td>
+                        <td>${hours[9].precip_in} in</td>
+                        <td>${hours[12].precip_in} in</td>
+                        <td>${hours[15].precip_in} in</td>
+                        <td>${hours[18].precip_in} in</td>
+                        <td>${hours[21].precip_in} in</td>
+
+                    </tr>
+                    <tr>
+                        <td>Cloud</td>
+                        <td>${hours[0].cloud}%</td>
+                        <td>${hours[3].cloud}%</td>
+                        <td>${hours[6].cloud}%</td>
+                        <td>${hours[9].cloud}%</td>
+                        <td>${hours[12].cloud}%</td>
+                        <td>${hours[15].cloud}%</td>
+                        <td>${hours[18].cloud}%</td>
+                        <td>${hours[21].cloud}%</td>
+                    </tr>
+                    <tr>
+                        <td>Humidity</td>
+                        <td>${hours[0].humidity}%</td>
+                        <td>${hours[3].humidity}%</td>
+                        <td>${hours[6].humidity}%</td>
+                        <td>${hours[9].humidity}%</td>
+                        <td>${hours[12].humidity}%</td>
+                        <td>${hours[15].humidity}%</td>
+                        <td>${hours[18].humidity}%</td>
+                        <td>${hours[21].humidity}%</td>
+                    </tr>
+                    <tr>
+                        <td>Pressure</td>
+                        <td>${hours[0].pressure_in} in</td>
+                        <td>${hours[3].pressure_in} in</td>
+                        <td>${hours[6].pressure_in} in</td>
+                        <td>${hours[9].pressure_in} in</td>
+                        <td>${hours[12].pressure_in} in</td>
+                        <td>${hours[15].pressure_in} in</td>
+                        <td>${hours[18].pressure_in} in</td>
+                        <td>${hours[21].pressure_in} in</td>
+                    </tr>
+                </table>
+            `
+            forecastContainer.appendChild(detailedWeatherBox);
+            forecastContainer.appendChild(detailedParametersBox);
+        };
+    });
+
+    // current detailed weather
+    
+    const detailedWeatherBox = document.createElement("div");
+    detailedWeatherBox.className = "detailed-weather";
+    detailedWeatherBox.innerHTML = `
+                <table>
+                    <caption>${data.forecast.forecastday[0].date}</caption>
+                    <tr>
+                        <td>Sunrise: ${data.forecast.forecastday[0].astro.sunrise}</td>
+                        <td>Max-temp</td>
+                        <td>Min-temp</td>
+                        <td>Avg-temp</td>
+                        <td>Total-precip</td>
+                        <td>Max-wind</td>
+                    </tr>
+                    <tr>
+                        <td>Sunset: ${data.forecast.forecastday[0].astro.sunset}</td>
+                        <td>${data.forecast.forecastday[0].day.maxtemp_c} °C</td>
+                        <td>${data.forecast.forecastday[0].day.mintemp_c} °C</td>
+                        <td>${data.forecast.forecastday[0].day.avgtemp_c} °C</td>
+                        <td>${data.forecast.forecastday[0].day.totalprecip_in} in</td>
+                        <td>${data.forecast.forecastday[0].day.maxwind_kph} kph</td>
+                    </tr>
+                </table>
+            
+            `
+
+    const detailedParametersBox = document.createElement("div");
+    detailedParametersBox.className = "detailed-parameters";
+
+    const hours = data.forecast.forecastday[0].hour;
+    // console.log(hours)
+    detailedParametersBox.innerHTML = `
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>${hours[0].time.slice(11)}</td>
+                        <td>${hours[3].time.slice(11)}</td>
+                        <td>${hours[6].time.slice(11)}</td>
+                        <td>${hours[9].time.slice(11)}</td>
+                        <td>${hours[12].time.slice(11)}</td>
+                        <td>${hours[15].time.slice(11)}</td>
+                        <td>${hours[18].time.slice(11)}</td>
+                        <td>${hours[21].time.slice(11)}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><img src="${hours[0].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[3].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[6].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[9].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[12].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[15].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[18].condition.icon}" alt="image not found"></td>
+                        <td><img src="${hours[21].condition.icon}" alt="image not found"></td>
+                    </tr>
+                    <tr>
+                        <td>Temp</td>
+                        <td>${hours[0].temp_c} °C</td>
+                        <td>${hours[3].temp_c} °C</td>
+                        <td>${hours[6].temp_c} °C</td>
+                        <td>${hours[9].temp_c} °C</td>
+                        <td>${hours[12].temp_c} °C</td>
+                        <td>${hours[15].temp_c} °C</td>
+                        <td>${hours[18].temp_c} °C</td>
+                        <td>${hours[21].temp_c} °C</td>
+                    </tr>
+                    <tr>
+                        <td>Wind</td>
+                        <td>${hours[0].wind_kph} kph</td>
+                        <td>${hours[3].wind_kph} kph</td>
+                        <td>${hours[6].wind_kph} kph</td>
+                        <td>${hours[9].wind_kph} kph</td>
+                        <td>${hours[12].wind_kph} kph</td>
+                        <td>${hours[15].wind_kph} kph</td>
+                        <td>${hours[18].wind_kph} kph</td>
+                        <td>${hours[21].wind_kph} kph</td>
+                    </tr>
+                    <tr>
+                        <td>Precip</td>
+                        <td>${hours[0].precip_in} in</td>
+                        <td>${hours[3].precip_in} in</td>
+                        <td>${hours[6].precip_in} in</td>
+                        <td>${hours[9].precip_in} in</td>
+                        <td>${hours[12].precip_in} in</td>
+                        <td>${hours[15].precip_in} in</td>
+                        <td>${hours[18].precip_in} in</td>
+                        <td>${hours[21].precip_in} in</td>
+
+                    </tr>
+                    <tr>
+                        <td>Cloud</td>
+                        <td>${hours[0].cloud}%</td>
+                        <td>${hours[3].cloud}%</td>
+                        <td>${hours[6].cloud}%</td>
+                        <td>${hours[9].cloud}%</td>
+                        <td>${hours[12].cloud}%</td>
+                        <td>${hours[15].cloud}%</td>
+                        <td>${hours[18].cloud}%</td>
+                        <td>${hours[21].cloud}%</td>
+                    </tr>
+                    <tr>
+                        <td>Humidity</td>
+                        <td>${hours[0].humidity}%</td>
+                        <td>${hours[3].humidity}%</td>
+                        <td>${hours[6].humidity}%</td>
+                        <td>${hours[9].humidity}%</td>
+                        <td>${hours[12].humidity}%</td>
+                        <td>${hours[15].humidity}%</td>
+                        <td>${hours[18].humidity}%</td>
+                        <td>${hours[21].humidity}%</td>
+                    </tr>
+                    <tr>
+                        <td>Pressure</td>
+                        <td>${hours[0].pressure_in} in</td>
+                        <td>${hours[3].pressure_in} in</td>
+                        <td>${hours[6].pressure_in} in</td>
+                        <td>${hours[9].pressure_in} in</td>
+                        <td>${hours[12].pressure_in} in</td>
+                        <td>${hours[15].pressure_in} in</td>
+                        <td>${hours[18].pressure_in} in</td>
+                        <td>${hours[21].pressure_in} in</td>
+                    </tr>
+                </table>
+      
+            `
+    forecastContainer.appendChild(detailedWeatherBox);
+    forecastContainer.appendChild(detailedParametersBox);
 }

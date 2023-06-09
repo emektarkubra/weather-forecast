@@ -1,9 +1,14 @@
 body {
-    background-image: url(https://www.wallpaperup.com/uploads/wallpapers/2020/03/17/1373964/472766df4d96f765c7d300631f905fcb-1000.jpg);
+    /* background-image: url(https://kan-yu.com.ua/wp-content/uploads/2017/01/201701-1.jpg); */
     display: flex;
     flex-direction: column;
     align-items: center;
+}
 
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 * {
@@ -189,6 +194,9 @@ p {
 .forecast-day:hover {
     background-color: rgba(255, 255, 255, 0.356);
 }
+.forecast-day:nth-child(1){
+    background-color: rgba(255, 255, 255, 0.356);
+}
 
 .icon {
     width: 70%;
@@ -268,4 +276,60 @@ h4 {
 caption {
     border: 1px solid rgba(255, 255, 255, 0.37);;
     font-size: 2vw;
+}
+
+
+
+@media(min-width: 100px) and (max-width: 800px){
+    .container{
+     width: 100%;
+   }
+
+   .detailed-weather  {
+    width: 100%;
+   }
+
+   .detailed-parameters {
+    width: 100%;
+   }
+
+   .today {
+    font-size: 3.5vw;
+   }
+
+   .current-date {
+    font-size: 2.5vw;
+}
+.information {
+    font-size: 2.2vw;
+
+}
+p {
+    font-size: 2vw; 
+}
+.day {
+    font-size: 2.5vw;
+}
+
+h4 {
+    font-size: 2.2vw;
+}
+caption {
+    font-size: 2.7vw;
+}
+
+.detailed-weather table {
+    font-size: 2.5vw;
+
+}
+
+.detailed-parameters table{
+
+    font-size: 2.5vw;
+
+   
+}
+
+
+
 }
