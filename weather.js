@@ -15,10 +15,7 @@ function getDataFromAPI(url) {
     return promise;
 }
 
-// getDataFromAPI(`http://api.weatherapi.com/v1/forecast.json?key=31102415b6534b21a47133156232605&q=07112&days=7&q=Ankara`)
-
-
-getDataFromAPI(`weatherapi.json`)
+getDataFromAPI(`http://api.weatherapi.com/v1/forecast.json?key=3c5c01d2237a4ab5a79125234231506&q=07112&days=7&q=Ankara`)
     .then((data) => {
         console.log(data)
         createElement(data);
@@ -26,7 +23,6 @@ getDataFromAPI(`weatherapi.json`)
     .catch((err) => {
         console.log(err);
     })
-
 
 const container = document.querySelector(".container");
 const forecastContainer = document.querySelector(".forecast-container");
@@ -165,12 +161,20 @@ function createElement(data) {
         // forecast detailed weather
         forecastDayBox.addEventListener("click", createDetailWeather)
 
-        function createDetailWeather() {
-            forecastContainer.innerHTML = ``;     
+        function createDetailWeather(e) {
+
+            forecastContainer.innerHTML = ``;
+            forecastDayBox.style.backgroundColor = "rgba(255, 255, 255, 0.356)";
+            for (let i = 0; i < forecastBox.children.length; i++) {
+                forecastBox.children[i];
+                if (forecastBox.children[i] != forecastDayBox) {
+                    forecastBox.children[i].style.backgroundColor = "rgba(0, 0, 0, 0)";
+                }
+            }
 
             const detailedWeatherBox = document.createElement("div");
             detailedWeatherBox.className = "detailed-weather";
-            
+
             detailedWeatherBox.innerHTML = `
                 <table>
                     <caption>${forecastDay.date}</caption>
@@ -193,12 +197,10 @@ function createElement(data) {
                 </table>
             
             `
-
             const detailedParametersBox = document.createElement("div");
             detailedParametersBox.className = "detailed-parameters";
 
             const hours = forecastDay.hour;
-            // console.log(hours)
             detailedParametersBox.innerHTML = `
                 <table>
                     <tr>
@@ -298,7 +300,7 @@ function createElement(data) {
     });
 
     // current detailed weather
-    
+
     const detailedWeatherBox = document.createElement("div");
     detailedWeatherBox.className = "detailed-weather";
     detailedWeatherBox.innerHTML = `
@@ -323,12 +325,10 @@ function createElement(data) {
                 </table>
             
             `
-
     const detailedParametersBox = document.createElement("div");
     detailedParametersBox.className = "detailed-parameters";
 
     const hours = data.forecast.forecastday[0].hour;
-    // console.log(hours)
     detailedParametersBox.innerHTML = `
                 <table>
                     <tr>

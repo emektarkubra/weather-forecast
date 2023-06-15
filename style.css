@@ -1,8 +1,8 @@
 body {
-    /* background-image: url(https://kan-yu.com.ua/wp-content/uploads/2017/01/201701-1.jpg); */
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor:none;
 }
 
 .forecast-container {
@@ -154,7 +154,6 @@ p {
     width: 50%;
     align-self: center;
     max-width:100%;
-    /* margin-left: 100px; */
     height: auto;
     display: flex;
     flex-direction: column;
@@ -191,9 +190,6 @@ p {
     cursor: pointer;
 }
 
-.forecast-day:hover {
-    background-color: rgba(255, 255, 255, 0.356);
-}
 .forecast-day:nth-child(1){
     background-color: rgba(255, 255, 255, 0.356);
 }
@@ -278,8 +274,6 @@ caption {
     font-size: 2vw;
 }
 
-
-
 @media(min-width: 100px) and (max-width: 800px){
     .container{
      width: 100%;
@@ -299,37 +293,34 @@ caption {
 
    .current-date {
     font-size: 2.5vw;
-}
-.information {
-    font-size: 2.2vw;
+    }
+    .information {
+        font-size: 2.2vw;
 
-}
-p {
-    font-size: 2vw; 
-}
-.day {
-    font-size: 2.5vw;
-}
+    }
+    p {
+        font-size: 2vw; 
+    }
+    .day {
+        font-size: 2.5vw;
+    }
 
-h4 {
-    font-size: 2.2vw;
-}
-caption {
-    font-size: 2.7vw;
-}
+    h4 {
+        font-size: 2.2vw;
+    }
+    caption {
+        font-size: 2.7vw;
+    }
 
-.detailed-weather table {
-    font-size: 2.5vw;
+    .detailed-weather table {
+        font-size: 2.5vw;
 
-}
+    }
 
-.detailed-parameters table{
+    .detailed-parameters table{
 
-    font-size: 2.5vw;
+        font-size: 2.5vw;
 
-   
-}
-
-
-
+    
+    }
 }
