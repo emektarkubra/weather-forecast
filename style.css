@@ -2,7 +2,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor:none;
 }
 
 .forecast-container {
@@ -126,18 +125,11 @@ h3 {
 
 
 .celcius {
-    border-right: 1px solid white;
     color: white;
     display: inline;
     padding-right: 5px;
     cursor: pointer;
-    font-size: 1.5vw;
-}
-.fahrenheit {
-    color: white;
-    display: inline;
-    cursor: pointer;
-    font-size: 1.5vw;
+    font-size: 2vw;
 }
 
 p {

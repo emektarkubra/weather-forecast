@@ -69,15 +69,11 @@ function createElement(data) {
     currentTempBox.className = "current-temperature";
 
     const temp = document.createElement("h3");
-    temp.textContent = `${data.current.temp_c}°`;
+    temp.textContent = `${data.current.temp_c}`;
 
     const celciusSymbol = document.createElement("div");
     celciusSymbol.className = "celcius";
-    celciusSymbol.textContent = "°C";
-
-    const fehrenheitSymbol = document.createElement("div");
-    fehrenheitSymbol.className = "fahrenheit";
-    fehrenheitSymbol.textContent = "°F";
+    celciusSymbol.textContent = " °C";
 
     const currentText = document.createElement("p");
     currentText.textContent = data.current.condition.text;
@@ -86,7 +82,7 @@ function createElement(data) {
     else if ((data.current.condition.text).includes("sun")) document.body.style.backgroundImage = "url('https://img.gazeta.ru/files3/839/7947839/upload-shutterstock_109674992-pic4_zoom-1500x1500-83836.jpg')";
     else if ((data.current.condition.text).includes("cloud")) document.body.style.backgroundImage = "url('https://images.unsplash.com/photo-1528157509193-8254fac59543?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80')";
     else if ((data.current.condition.text).includes("snow")) document.body.style.backgroundImage = "url('https://kan-yu.com.ua/wp-content/uploads/2017/01/201701-1.jpg')";
-
+    else document.body.style.backgroundImage = "url('https://i1.wp.com/img-4.linternaute.com/7XGwcTIr6IY-S5lBEURQRroZGvM=/1500x/smart/0d64a778e3b54ed9a43c3f927514df7f/ccmcms-linternaute/31139160.jpg')";
     const currentInformBox = document.createElement("div");
     currentInformBox.className = "information";
     currentInformBox.innerHTML = `
@@ -110,7 +106,6 @@ function createElement(data) {
     weatherConditionBox.appendChild(currentTempBox);
     currentTempBox.appendChild(temp);
     currentTempBox.appendChild(celciusSymbol);
-    currentTempBox.appendChild(fehrenheitSymbol);
     currentTempBox.appendChild(currentText);
     currentBox.appendChild(currentInformBox);
 
