@@ -31,30 +31,23 @@ A Weather API that returns information about current and forecast weather datas.
 
 Visit the main page of this API (that comes by default with json-server) after login and get API key:
 
-```javascript
-http://api.weatherapi.com/v1/forecast.json?key=<YOUR_API_KEY>&q=07112&days=7
+[http://api.weatherapi.com/v1/forecast.json?key=<YOUR_API_KEY>&q=07112&days=7](http://api.weatherapi.com/v1/forecast.json?key=<YOUR_API_KEY>&q=07112&days=7)
 
-```
 ### Endpoints
 
 Endpoints may change depending on the number of days, to the city and whether it is current, forecast or both;
 
-
-
 So to get current weather for London: (JSON)
-```javascript
-http://api.weatherapi.com/v1/current.json?key=<YOUR_API_KEY>&q=London
-```
+
+[http://api.weatherapi.com/v1/current.json?key=<YOUR_API_KEY>&q=London](http://api.weatherapi.com/v1/current.json?key=<YOUR_API_KEY>&q=London)
 
 To get 7 day weather for US Zipcode 07112: (JSON)
-```javascript
-http://api.weatherapi.com/v1/forecast.json?key=<YOUR_API_KEY>&q=07112&days=7
-```
+
+[http://api.weatherapi.com/v1/forecast.json?key=<YOUR_API_KEY>&q=07112&days=7](http://api.weatherapi.com/v1/forecast.json?key=<YOUR_API_KEY>&q=07112&days=7)
 
 Search for cities starting with Lond: (JSON)
-```javascript
-http://api.weatherapi.com/v1/search.json?key=<YOUR_API_KEY>&q=lond
-```
+
+[http://api.weatherapi.com/v1/search.json?key=<YOUR_API_KEY>&q=lond](http://api.weatherapi.com/v1/search.json?key=<YOUR_API_KEY>&q=lond)
 
 ### How to use
 Here is a JavaScript example of fetching the entire API. Just change the URL or key and endpoint for fetching different APIs
