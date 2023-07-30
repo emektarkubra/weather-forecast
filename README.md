@@ -49,34 +49,6 @@ Search for cities starting with Lond: (JSON)
 
 [http://api.weatherapi.com/v1/search.json?key=<YOUR_API_KEY>&q=lond](http://api.weatherapi.com/v1/search.json?key=<YOUR_API_KEY>&q=lond)
 
-### How to use
-Here is a JavaScript example of fetching the entire API. Just change the URL or key and endpoint for fetching different APIs
-
-```javascript
-function getDataFromAPI(url) {
-    return new Promise((resolve, reject) => {
-        fetch(url)
-            .then((response) => {
-                return response.json();
-            })
-            .then((data) => {
-                resolve(data);
-            })
-            .catch((err) => {
-                reject(err);
-            })
-    })
-}
-
-getDataFromAPI(`http://api.weatherapi.com/v1/forecast.json?key=3c5c01d2237a4ab5a79125234231506&q=07112&days=7&q=Ankara`)
-    .then((data) => {
-        console.log(data)
-    })
-    .catch((err) => {
-        console.log(err);
-    })
-```
-
 ## 🚀 Getting Started
 
 There are no prerequisites for this project.
